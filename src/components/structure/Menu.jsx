@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useRef } from "react";
+import { Offcanvas } from "react-bootstrap";
 import { Player } from "@lordicon/react";
-import "react-router-dom";
+import AVATAR from "../../assets/avatar.json";
 import "./Menu.css";
-
-const ICON = require("./avatar.json");
 
 const Menu = () => {
   const [openState, setOpenState] = useState(false);
@@ -23,9 +22,7 @@ const Menu = () => {
   };
 
   const manageNav = () => {
-    setOpenState(() => {
-      !openState;
-    });
+    setOpenState((prevState) => !prevState);
     const openbtn = document.querySelector(".openbtn");
     openbtn.classList.toggle("active", openState);
     openState ? openNav() : closeNav();
@@ -41,17 +38,6 @@ const Menu = () => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       ></link>
-      <div className="sidebar" id="main-sidebar">
-        <div className="sidebarTopContent">
-          <i className="fa-solid fa-gamepad"></i>
-        </div>
-        <div className="sidebarBottomContent">
-          <i onMouseEnter={() => handleHover(avatarRef)} style={{ width: 10 }}>
-            <Player ref={avatarRef} size={100} icon={ICON} />
-          </i>
-        </div>
-      </div>
-
       <div id="menu-button">
         <button
           className="openbtn"
@@ -64,6 +50,24 @@ const Menu = () => {
           <span></span>
         </button>
       </div>
+      <Offcanvas show={openState} onHide="" scroll="true" backdrop="false">
+        <Offcanvas.Header>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div className="sidebarTopContent">
+            <i className="fa-solid fa-gamepad"></i>
+          </div>
+          <div className="sidebarBottomContent">
+            <i
+              onMouseEnter={() => handleHover(avatarRef)}
+              style={{ width: 10 }}
+            >
+              <Player ref={avatarRef} size={50} icon={AVATAR} />
+            </i>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </Fragment>
   );
 };

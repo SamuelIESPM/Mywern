@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@lordicon/react": "^1.4.1",
+    "bootstrap": "^5.3.3",
     "lottie-react-native": "^6.6.0",
     "lottie-web": "^5.12.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1"
   },

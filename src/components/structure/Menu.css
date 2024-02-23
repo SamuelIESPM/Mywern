@@ -26,6 +26,10 @@
   color: #f1f1f1;
 }
 
+Offcanvas {
+  z-index: 1000;
+}
+
 .sidebarBottomContent {
   bottom: 0;
   position: fixed;
@@ -36,12 +40,12 @@
 .sidebarBottomContent,
 .sidebarTopContent {
   transition: transform 0.5s;
-  transform: translateX(-40px);
+  transform: translateX(-80px);
 }
 
 .sidebar.active .sidebarBottomContent,
 .sidebar.active .sidebarTopContent {
-  transform: translateX(10px);
+  transform: translateX(50px);
 }
 
 .openbtn {
