@@ -1,0 +1,95 @@
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #762a3a;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar i {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar i:hover {
+  color: #f1f1f1;
+}
+
+.sidebarBottomContent {
+  bottom: 0;
+  position: fixed;
+  transition: transform 0.5s;
+  transform: translateX(-40px);
+}
+
+.sidebarBottomContent,
+.sidebarTopContent {
+  transition: transform 0.5s;
+  transform: translateX(-40px);
+}
+
+.sidebar.active .sidebarBottomContent,
+.sidebar.active .sidebarTopContent {
+  transform: translateX(10px);
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #762a3a;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  position: relative;
+}
+
+.openbtn span {
+  background-color: white;
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin-bottom: 5px;
+  transition: transform 0.5s, opacity 0.5s;
+  border-radius: 50px;
+}
+
+.openbtn span:nth-child(1) {
+  margin-top: 5px;
+}
+
+.openbtn.active span {
+  border-radius: 80%;
+}
+
+.openbtn.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.openbtn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.openbtn.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#menu-button {
+  transition: margin-left 0.5s;
+  padding: 16px;
+  color: snow;
+}
