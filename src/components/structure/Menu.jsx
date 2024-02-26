@@ -1,12 +1,17 @@
 import React, { Fragment, useState, useRef } from "react";
-import { Offcanvas } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Player } from "@lordicon/react";
 import AVATAR from "../../assets/avatar.json";
+import JOISTICK from "../../assets/joistick.json";
+import GLOBE from "../../assets/globe.json";
+import EDIT from "../../assets/edit.json";
 import "./Menu.css";
 
 const Menu = () => {
   const [openState, setOpenState] = useState(false);
   const playerRef = useRef(null);
+  const wikiRef = useRef(null);
+  const editRef = useRef(null);
   const avatarRef = useRef(null);
 
   const openNav = () => {
@@ -32,6 +37,10 @@ const Menu = () => {
     if (ref.current) ref.current.playFromBeginning();
   };
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
   return (
     <Fragment>
       <link
@@ -50,24 +59,35 @@ const Menu = () => {
           <span></span>
         </button>
       </div>
-      <Offcanvas show={openState} onHide="" scroll="true" backdrop="false">
-        <Offcanvas.Header>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div className="sidebarTopContent">
-            <i className="fa-solid fa-gamepad"></i>
-          </div>
-          <div className="sidebarBottomContent">
+      <div className="sidebar" id="main-sidebar">
+        <div className="sidebarTopContent">
+          <Link to="/">
             <i
-              onMouseEnter={() => handleHover(avatarRef)}
+              onMouseEnter={() => handleHover(playerRef)}
               style={{ width: 10 }}
             >
-              <Player ref={avatarRef} size={50} icon={AVATAR} />
+              <Player ref={playerRef} size={50} icon={JOISTICK} />
             </i>
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
+          </Link>
+          <Link to="/wiki">
+            <i onMouseEnter={() => handleHover(wikiRef)} style={{ width: 10 }}>
+              <Player ref={wikiRef} size={50} icon={GLOBE} />
+            </i>
+          </Link>
+        </div>
+        <div className="sidebarBottomContent">
+          <i onMouseEnter={() => handleHover(editRef)} style={{ width: 10 }}>
+            <Player ref={editRef} size={50} icon={EDIT} />
+          </i>
+          <i
+            onMouseEnter={() => handleHover(avatarRef)}
+            style={{ width: 10 }}
+            onClick={() => openModal()}
+          >
+            <Player ref={avatarRef} size={50} icon={AVATAR} />
+          </i>
+        </div>
+      </div>
     </Fragment>
   );
 };

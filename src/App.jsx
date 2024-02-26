@@ -1,26 +1,20 @@
-import { useState, Fragment } from "react";
+import { Fragment } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/structure/Header.jsx";
 import Menu from "./components/structure/Menu.jsx";
+import Wiki from "./components/Wiki.jsx";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Fragment>
-      <Menu />
-      <div></div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <BrowserRouter>
+        <Menu />
+        <Routes>
+          <Route path="/wiki" element={<Wiki />} />
+        </Routes>
+      </BrowserRouter>
     </Fragment>
   );
 }

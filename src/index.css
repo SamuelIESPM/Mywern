@@ -1,0 +1,16 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  color: snow;
+}
+
+#content {
+  margin-left: 100px;
+  position: fixed;
+  background-color: #381d4e;
+  width: 85%;
+  padding: 10px;
+  border-radius: 20px;
+}

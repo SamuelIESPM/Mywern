@@ -1,0 +1,22 @@
+header {
+  text-align: center;
+  position: sticky;
+  background-color: #762a3a;
+  margin: 0;
+  height: 81px;
+  padding: 0.1px 0;
+  z-index: 1000;
+}
+
+.logo {
+  background-color: snow;
+  width: 81px;
+  height: 81px;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+
+h1 {
+  color: snow;
+}

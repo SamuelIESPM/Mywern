@@ -25,11 +25,6 @@
 .sidebar i:hover {
   color: #f1f1f1;
 }
-
-Offcanvas {
-  z-index: 1000;
-}
-
 .sidebarBottomContent {
   bottom: 0;
   position: fixed;
@@ -45,7 +40,12 @@ Offcanvas {
 
 .sidebar.active .sidebarBottomContent,
 .sidebar.active .sidebarTopContent {
-  transform: translateX(50px);
+  transform: translateX(0px);
+}
+
+.sidebar.active .sidebarBottomContent:hover,
+.sidebar.active .sidebarTopContent:hover {
+  cursor: pointer;
 }
 
 .openbtn {
@@ -56,6 +56,7 @@ Offcanvas {
   padding: 10px 10px;
   border: none;
   position: relative;
+  border-radius: 100%;
 }
 
 .openbtn span {
