@@ -52,7 +52,6 @@
   font-size: 20px;
   cursor: pointer;
   background-color: #762a3a;
-  color: white;
   padding: 10px 10px;
   border: none;
   position: relative;
@@ -60,7 +59,7 @@
 }
 
 .openbtn span {
-  background-color: white;
+  background-color: snow;
   display: block;
   width: 25px;
   height: 3px;
@@ -96,5 +95,4 @@
 #menu-button {
   transition: margin-left 0.5s;
   padding: 16px;
-  color: snow;
 }

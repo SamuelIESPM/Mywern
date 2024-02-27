@@ -1,4 +1,9 @@
-header {
+@font-face {
+  font-family: Warmonger;
+  src: url("../../fonts/warmongerbb.ttf");
+}
+
+.page-header {
   text-align: center;
   position: sticky;
   background-color: #762a3a;
@@ -6,14 +11,16 @@ header {
   height: 81px;
   padding: 0.1px 0;
   z-index: 1000;
+  font-family: Warmonger;
+  font-size: large;
 }
 
 .logo {
-  background-color: snow;
   width: 81px;
   height: 81px;
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 100;
 }
 

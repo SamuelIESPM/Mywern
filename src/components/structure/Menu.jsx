@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Player } from "@lordicon/react";
+import useUserContext from "../../hooks/useUserContext";
 import AVATAR from "../../assets/avatar.json";
 import JOISTICK from "../../assets/joistick.json";
 import GLOBE from "../../assets/globe.json";
@@ -8,6 +9,8 @@ import EDIT from "../../assets/edit.json";
 import "./Menu.css";
 
 const Menu = () => {
+  const { openModal } = useUserContext();
+
   const [openState, setOpenState] = useState(false);
   const playerRef = useRef(null);
   const wikiRef = useRef(null);
@@ -37,10 +40,6 @@ const Menu = () => {
     if (ref.current) ref.current.playFromBeginning();
   };
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
   return (
     <Fragment>
       <link
@@ -61,7 +60,7 @@ const Menu = () => {
       </div>
       <div className="sidebar" id="main-sidebar">
         <div className="sidebarTopContent">
-          <Link to="/">
+          <Link to="/game">
             <i
               onMouseEnter={() => handleHover(playerRef)}
               style={{ width: 10 }}
@@ -76,13 +75,17 @@ const Menu = () => {
           </Link>
         </div>
         <div className="sidebarBottomContent">
-          <i onMouseEnter={() => handleHover(editRef)} style={{ width: 10 }}>
+          <i
+            onMouseEnter={() => handleHover(editRef)}
+            style={{ width: 10 }}
+            onClick={() => {}}
+          >
             <Player ref={editRef} size={50} icon={EDIT} />
           </i>
           <i
             onMouseEnter={() => handleHover(avatarRef)}
             style={{ width: 10 }}
-            onClick={() => openModal()}
+            onClick={async () => await openModal()}
           >
             <Player ref={avatarRef} size={50} icon={AVATAR} />
           </i>
