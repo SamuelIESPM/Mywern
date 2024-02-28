@@ -60,7 +60,12 @@ const Menu = () => {
       </div>
       <div className="sidebar" id="main-sidebar">
         <div className="sidebarTopContent">
-          <Link to="/game">
+          <Link
+            to="/game"
+            onClick={() => {
+              manageNav();
+            }}
+          >
             <i
               onMouseEnter={() => handleHover(playerRef)}
               style={{ width: 10 }}
@@ -68,7 +73,12 @@ const Menu = () => {
               <Player ref={playerRef} size={50} icon={JOISTICK} />
             </i>
           </Link>
-          <Link to="/wiki">
+          <Link
+            to="/wiki"
+            onClick={() => {
+              manageNav();
+            }}
+          >
             <i onMouseEnter={() => handleHover(wikiRef)} style={{ width: 10 }}>
               <Player ref={wikiRef} size={50} icon={GLOBE} />
             </i>

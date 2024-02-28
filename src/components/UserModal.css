@@ -1,3 +1,14 @@
 .user-modal {
-  background-color: beige;
+  background-color: #762a3a;
+  color: darkgrey;
+}
+
+.formInput {
+  background-color: darkslategrey;
+  color: snow;
+}
+
+.formInput:focus {
+  background-color: darkgrey;
+  color: snow;
 }

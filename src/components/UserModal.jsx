@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Container, Row, Col } from "react-bootstrap";
 import useUserContext from "../hooks/useUserContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserModal.css";
 
 const UserModal = ({ showModal }) => {
-  const { user, closeModal } = useUserContext();
+  const { user, closeModal, logoutUser } = useUserContext();
   const defaultUserState = {
     email: "",
     password: "",
@@ -13,7 +13,7 @@ const UserModal = ({ showModal }) => {
 
   const [loginUser, setLoginUser] = useState(defaultUserState);
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
 
@@ -21,20 +21,50 @@ const UserModal = ({ showModal }) => {
 
   return (
     <Modal size="md" centered show={showModal} onHide={closeModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>{user ? "pepe" : "Log In"}</Modal.Title>
+      <Modal.Header closeButton className="user-modal">
+        <Modal.Title>{user ? "User" : "Log In"}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="user-modal">
         {user ? (
-          <></>
+          <Container>
+            <Row>
+              <Col>
+                <Row>
+                  <Col xs={12}>{user.email}</Col>
+                </Row>
+                <Row>
+                  <Col xs={4}>{user.role}</Col>
+                </Row>
+                <Row>
+                  <Button
+                    onClick={() => {
+                      logoutUser;
+                    }}
+                    variant="danger"
+                  >
+                    Log Out
+                  </Button>
+                </Row>
+              </Col>
+              <Col>
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ68D1zB62HiAWZAkQpessCgGpmfvJQUX8Rhg&usqp=CAU"
+                  alt="noPhoto"
+                />
+              </Col>
+            </Row>
+          </Container>
         ) : (
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email usuario</Form.Label>
               <Form.Control
+                className="formInput"
+                required
                 type="email"
                 name="email"
-                placeholder="Enter email"
+                placeholder="Introduzca email"
+                autoFocus
                 onChange={(e) => {
                   handleChange(e);
                 }}
@@ -42,25 +72,30 @@ const UserModal = ({ showModal }) => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Contrasenya</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control
+                className="formInput"
+                required
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Contraseña"
+                s
                 onChange={(e) => {
                   handleChange(e);
                 }}
               />
             </Form.Group>
-            <Button onClick={handleLogin}>Log In</Button>
+            <Button onClick={handleLogin} variant="success">
+              Log In
+            </Button>
           </Form>
         )}
       </Modal.Body>
-      {!user && (
-        <Modal.Footer>
-          <Button onClick={closeModal}>Close</Button>
-        </Modal.Footer>
-      )}
+      <Modal.Footer className="user-modal">
+        <Button onClick={closeModal} variant="warning">
+          Close
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 };

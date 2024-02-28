@@ -6,7 +6,7 @@ const Content = (props) => {
   const { modalShow } = useUserContext();
   return (
     <Fragment>
-      <UserModal showModal={modalShow} />
+      {modalShow && <UserModal showModal={modalShow} />}
       {props.children}
     </Fragment>
   );
