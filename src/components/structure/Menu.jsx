@@ -9,7 +9,7 @@ import EDIT from "../../assets/edit.json";
 import "./Menu.css";
 
 const Menu = () => {
-  const { openModal } = useUserContext();
+  const { openModal, user } = useUserContext();
 
   const [openState, setOpenState] = useState(false);
   const playerRef = useRef(null);
@@ -38,6 +38,10 @@ const Menu = () => {
 
   const handleHover = (ref) => {
     if (ref.current) ref.current.playFromBeginning();
+  };
+
+  const handleEdit = () => {
+    setEditMode((prevState) => !prevState);
   };
 
   return (
@@ -85,13 +89,17 @@ const Menu = () => {
           </Link>
         </div>
         <div className="sidebarBottomContent">
-          <i
-            onMouseEnter={() => handleHover(editRef)}
-            style={{ width: 10 }}
-            onClick={() => {}}
-          >
-            <Player ref={editRef} size={50} icon={EDIT} />
-          </i>
+          {user && user.role === "page_admin" && (
+            <i
+              onMouseEnter={() => handleHover(editRef)}
+              style={{ width: 10 }}
+              onClick={() => {
+                handleEdit();
+              }}
+            >
+              <Player ref={editRef} size={50} icon={EDIT} />
+            </i>
+          )}
           <i
             onMouseEnter={() => handleHover(avatarRef)}
             style={{ width: 10 }}

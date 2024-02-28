@@ -1,9 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import "./Wiki.css";
 
 const Wiki = () => {
-  const setInfo = (e) => {};
+  const [selectedWiki, setSelectedWiki] = useState(null);
+  const setInfo = (e) => {
+    setSelectedWiki(e.target);
+  };
   return (
     <Fragment>
       <Navbar data-bs-theme="dark" className="nav-bar justify-content-left">
@@ -42,7 +45,7 @@ const Wiki = () => {
       </Navbar>
       <div id="content">
         <Container>
-          <Row></Row>
+          <Row>{selectedWiki ? selectedWiki.name : "Wiki"}</Row>
           <Row></Row>
           <Row></Row>
         </Container>

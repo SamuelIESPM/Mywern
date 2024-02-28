@@ -10,5 +10,5 @@
 
 .formInput:focus {
   background-color: darkgrey;
-  color: snow;
+  color: darkslategray;
 }

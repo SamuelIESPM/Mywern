@@ -5,19 +5,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./UserModal.css";
 
 const UserModal = ({ showModal }) => {
-  const { user, closeModal, logoutUser } = useUserContext();
+  const { user, closeModal, logoutUser, loginUser } = useUserContext();
   const defaultUserState = {
     email: "",
     password: "",
   };
 
-  const [loginUser, setLoginUser] = useState(defaultUserState);
+  const [loginUserData, setLoginUserData] = useState(defaultUserState);
 
   const handleChange = (e) => {
-    setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
+    setLoginUserData({ ...loginUserData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    await loginUser(loginUserData);
+  };
 
   return (
     <Modal size="md" centered show={showModal} onHide={closeModal}>
@@ -38,7 +40,7 @@ const UserModal = ({ showModal }) => {
                 <Row>
                   <Button
                     onClick={() => {
-                      logoutUser;
+                      logoutUser();
                     }}
                     variant="danger"
                   >
