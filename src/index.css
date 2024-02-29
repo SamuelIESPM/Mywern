@@ -14,7 +14,7 @@ html {
   max-height: 75%;
   padding: 10px;
   border-radius: 20px;
-  overflow: scroll hidden;
+  overflow: scroll;
   overflow-x: hidden;
 }
 
