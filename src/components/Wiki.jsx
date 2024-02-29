@@ -1,22 +1,23 @@
 import React, { Fragment, useState, useRef } from "react";
-import {
-  Navbar,
-  Container,
-  Nav,
-  Row,
-  Col,
-  Alert,
-  Spinner,
-} from "react-bootstrap";
+import { Navbar, Container, Nav, Row, Col, Alert } from "react-bootstrap";
 import useLevelsContext from "../hooks/useLevelsContext.jsx";
 import useUserContext from "../hooks/useUserContext.jsx";
 import { Player } from "@lordicon/react";
+import WikiModal from "./WikiModal.jsx";
 import Level from "./Level.jsx";
 import ADD from "../assets/plusCircle.json";
 import "./Wiki.css";
 
 const Wiki = () => {
-  const { levelsList, situation, level, getLevels } = useLevelsContext();
+  const {
+    levelsList,
+    situation,
+    level,
+    selectLevel,
+    setLevel,
+    openModal,
+    showModal,
+  } = useLevelsContext();
   const { editMode } = useUserContext();
   const addRef = useRef(null);
 
@@ -28,9 +29,18 @@ const Wiki = () => {
     if (ref.current) ref.current.playFromBeginning();
   };
 
+  const handleSelect = async (e) => {
+    await selectLevel(e.target.id);
+  };
+
   const setInfo = (e) => {
     setSelectedWiki(e.target.name);
   };
+
+  const handleAdd = () => {
+    openModal();
+  };
+
   return (
     <Fragment>
       <Navbar data-bs-theme="dark" className="nav-bar justify-content-left">
@@ -54,6 +64,7 @@ const Wiki = () => {
               value="Niveles"
               onClick={(e) => {
                 setInfo(e);
+                setLevel(null);
               }}
             >
               Niveles
@@ -63,6 +74,7 @@ const Wiki = () => {
               href="#characters"
               onClick={(e) => {
                 setInfo(e);
+                setLevel(null);
               }}
             >
               Personajes
@@ -72,6 +84,7 @@ const Wiki = () => {
               href="#enemies"
               onClick={(e) => {
                 setInfo(e);
+                setLevel(null);
               }}
             >
               Enemigos
@@ -93,7 +106,7 @@ const Wiki = () => {
                       }}
                       style={{ width: 10, cursor: "pointer" }}
                     >
-                      <Player ref={addRef} size={50} icon={ADD} />
+                      <Player ref={addRef} size={40} icon={ADD} />
                     </i>
                   )}
                 </Col>
@@ -123,34 +136,26 @@ const Wiki = () => {
                     sm={leftColSize}
                     onClick={(e) => {
                       if (e.target.classList.contains("listed-level")) {
-                        handcleSelect(e);
+                        handleSelect(e);
                         setLeftColSize(8);
                       }
                     }}
                   >
                     {levelsList.map((level) => {
                       return (
-                        <Level
-                          key={level.id}
-                          data={level}
+                        <h4
                           className="listed-level"
-                        />
+                          id={level.id}
+                          key={level.id}
+                          style={{ cursor: "pointer" }}
+                        >
+                          Nivel {level.level_n} | {level.name}
+                        </h4>
                       );
                     })}
                   </Col>
                   <Col sm={12 - leftColSize}>
-                    {level && (
-                      <>
-                        <Row>
-                          <img src={level.img} alt={level.name} />
-                        </Row>
-                        <Row>
-                          <Col>Nivel {level.level_n}</Col>
-                          <Col>{level.name}</Col>
-                        </Row>
-                        <Row>{level.description}</Row>
-                      </>
-                    )}
+                    {level && <Level key={level.id} />}
                   </Col>
                 </>
               ) : (
@@ -165,6 +170,7 @@ const Wiki = () => {
           </Row>
         </Container>
       </div>
+      {showModal && <WikiModal show={showModal} type="Agregar" func="add" />}
     </Fragment>
   );
 };

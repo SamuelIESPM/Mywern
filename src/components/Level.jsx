@@ -1,48 +1,89 @@
 import React, { Fragment, useRef } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import useUserContext from "../hooks/useUserContext.jsx";
 import useLevelsContext from "../hooks/useLevelsContext.jsx";
 import { Player } from "@lordicon/react";
-import REMOVE from "../assets/minusCircle.json";
+import REMOVE from "../assets/trashBin.json";
+import EDIT from "../assets/editDocument.json";
+import CLOSE from "../assets/minusCircle.json";
+import WikiModal from "./WikiModal.jsx";
 
-const Level = (props) => {
-  const { deleteLevel } = useLevelsContext();
+const Level = () => {
+  const { deleteLevel, level, setLevel, openModal, showModal } =
+    useLevelsContext();
   const { editMode } = useUserContext();
 
   const deleteRef = useRef(null);
-  const { level_n, name, id } = props.data;
+  const editRef = useRef(null);
+  const closeRef = useRef(null);
 
   const handleHover = (ref) => {
     if (ref.current) ref.current.playFromBeginning();
   };
 
   const handleDelete = async () => {
-    await deleteLevel(id);
+    await deleteLevel(level[0].id);
+    setLevel(null);
+  };
+
+  const handleEdit = () => {
+    openModal();
   };
 
   return (
     <Fragment>
-      <Row>
-        <Col sm={5}>
-          <h2>Nivel {level_n}</h2>
-        </Col>
-        <Col sm={6}>
-          <h3>{name}</h3>
-        </Col>
-        <Col>
-          {editMode && (
+      <Card bg="dark" text="light">
+        {editMode && (
+          <Card.Header style={{ display: "flex" }}>
             <i
               onMouseEnter={() => handleHover(deleteRef)}
               onClick={() => {
                 handleDelete();
               }}
-              style={{ width: 10, cursor: "pointer" }}
+              style={{ cursor: "pointer" }}
             >
-              <Player ref={deleteRef} size={40} icon={REMOVE} />
+              <Player ref={deleteRef} size={30} icon={REMOVE} />
             </i>
-          )}
-        </Col>
-      </Row>
+            <i
+              onMouseEnter={() => handleHover(editRef)}
+              onClick={() => {
+                handleEdit();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <Player ref={editRef} size={30} icon={EDIT} />
+            </i>
+          </Card.Header>
+        )}
+
+        <Card.Title
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <span>
+            Nivel {level[0].level_n} {level[0].name}
+          </span>
+          <i
+            onMouseEnter={() => handleHover(closeRef)}
+            onClick={() => {
+              setLevel(null);
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <Player ref={closeRef} size={25} icon={CLOSE} />
+          </i>
+        </Card.Title>
+
+        {level[0].image ? (
+          <Card.Img src={level[0].image} alt={level[0].name} />
+        ) : (
+          <Card.Img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+            alt="Image not found"
+          />
+        )}
+        <Card.Body>{level[0].description}</Card.Body>
+      </Card>
+      {showModal && <WikiModal show={showModal} type="Nivel" func="edit" />}
     </Fragment>
   );
 };

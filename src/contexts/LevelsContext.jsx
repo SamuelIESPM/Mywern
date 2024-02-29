@@ -10,6 +10,7 @@ const levelsContext = ({ children }) => {
   const [levelsList, setLevelsList] = useState(initialLevelsList);
   const [level, setLevel] = useState(initialLevel);
   const [situation, setSituation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const getLevels = async () => {
     try {
@@ -23,7 +24,7 @@ const levelsContext = ({ children }) => {
     }
   };
 
-  const selectLevels = async (levelId) => {
+  const selectLevel = async (levelId) => {
     try {
       const { data, error } = await supabaseConnection
         .from("levels")
@@ -74,20 +75,33 @@ const levelsContext = ({ children }) => {
     }
   };
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     getLevels();
   }, []);
 
   const exportData = {
     getLevels,
-    selectLevels,
+    selectLevel,
     createLevel,
     updateLevel,
     deleteLevel,
+    setLevel,
     levelsList,
     level,
     initialLevel,
     situation,
+    showModal,
+    setShowModal,
+    openModal,
+    closeModal,
   };
   return (
     <ContextOfLevel.Provider value={exportData}>

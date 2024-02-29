@@ -2,6 +2,7 @@ import React, { Fragment, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Player } from "@lordicon/react";
 import useUserContext from "../../hooks/useUserContext";
+import useLevelsContext from "../../hooks/useLevelsContext";
 import AVATAR from "../../assets/avatar.json";
 import JOISTICK from "../../assets/joistick.json";
 import GLOBE from "../../assets/globe.json";
@@ -10,6 +11,7 @@ import "./Menu.css";
 
 const Menu = () => {
   const { openModal, user, setEditMode } = useUserContext();
+  const { setLevel } = useLevelsContext();
 
   const [openState, setOpenState] = useState(false);
   const playerRef = useRef(null);
@@ -68,6 +70,7 @@ const Menu = () => {
             to="/game"
             onClick={() => {
               manageNav();
+              setLevel(null);
             }}
           >
             <i
@@ -81,6 +84,7 @@ const Menu = () => {
             to="/wiki"
             onClick={() => {
               manageNav();
+              setLevel(null);
             }}
           >
             <i onMouseEnter={() => handleHover(wikiRef)} style={{ width: 10 }}>
