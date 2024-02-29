@@ -24,6 +24,7 @@ const Wiki = () => {
   const expandedSize = 12;
   const [selectedWiki, setSelectedWiki] = useState(null);
   const [leftColSize, setLeftColSize] = useState(expandedSize);
+  const [localShowModal, setLocalShowModal] = useState(false); //
 
   const handleHover = (ref) => {
     if (ref.current) ref.current.playFromBeginning();
@@ -39,6 +40,11 @@ const Wiki = () => {
 
   const handleAdd = () => {
     openModal();
+    setLocalShowModal(true);
+  };
+
+  const closeLocal = () => {
+    setLocalShowModal(false);
   };
 
   return (
@@ -170,7 +176,14 @@ const Wiki = () => {
           </Row>
         </Container>
       </div>
-      {showModal && <WikiModal show={showModal} type="Agregar" func="add" />}
+      {showModal && (
+        <WikiModal
+          show={localShowModal}
+          type="Agregar"
+          func="add"
+          closeAdd={closeLocal}
+        />
+      )}
     </Fragment>
   );
 };

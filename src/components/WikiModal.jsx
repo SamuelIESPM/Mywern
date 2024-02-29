@@ -11,7 +11,7 @@ import {
   Button,
 } from "react-bootstrap";
 
-const WikiModal = ({ show, type, func }) => {
+const WikiModal = ({ show, type, func, closeAdd }) => {
   const initialLevel = {
     id: "",
     name: "...",
@@ -62,6 +62,7 @@ const WikiModal = ({ show, type, func }) => {
         onHide={() => {
           show = false;
           closeModal();
+          closeAdd();
         }}
       >
         <Modal.Header closeButton className="user-modal">
@@ -111,10 +112,8 @@ const WikiModal = ({ show, type, func }) => {
                       <Form.Label>Nombre</Form.Label>
                       <Form.Control
                         className="formInput"
-                        required
                         type="text"
                         name="image"
-                        placeholder="image.png/.jpg/.gif ..."
                         onChange={(e) => {
                           handleChange(e);
                         }}
@@ -192,7 +191,7 @@ const WikiModal = ({ show, type, func }) => {
                     Nivel {newLevel.level_n} {newLevel.name}
                   </Card.Title>
                   {newLevel.image ? (
-                    <Card.Img src={level[0].image} alt={level[0].name} />
+                    <Card.Img src={newLevel.image} alt={newLevel.name} />
                   ) : (
                     <Card.Img
                       src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
