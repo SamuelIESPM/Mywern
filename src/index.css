@@ -6,11 +6,22 @@ html {
   color: snow;
 }
 
-#content {
-  margin-left: 100px;
+#content,
+.landing {
   position: fixed;
   background-color: #381d4e;
   width: 90%;
+  max-height: 75%;
   padding: 10px;
   border-radius: 20px;
+  overflow: scroll hidden;
+  overflow-x: hidden;
+}
+
+#pageContainer {
+  margin-left: 100px;
+}
+
+.landing img {
+  margin: 7px;
 }

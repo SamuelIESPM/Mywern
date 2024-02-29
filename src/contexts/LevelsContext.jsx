@@ -5,7 +5,10 @@ const ContextOfLevel = createContext();
 
 const levelsContext = ({ children }) => {
   const initialLevelsList = [];
+  const initialLevel = null;
+
   const [levelsList, setLevelsList] = useState(initialLevelsList);
+  const [level, setLevel] = useState(initialLevel);
   const [situation, setSituation] = useState(null);
 
   const getLevels = async () => {
@@ -27,7 +30,7 @@ const levelsContext = ({ children }) => {
         .select("*")
         .eq("id", levelId);
       if (error) throw error;
-      setLevelsList(data);
+      setLevel(data);
     } catch (error) {
       setSituation(error.message);
     }
@@ -82,6 +85,8 @@ const levelsContext = ({ children }) => {
     updateLevel,
     deleteLevel,
     levelsList,
+    level,
+    initialLevel,
     situation,
   };
   return (

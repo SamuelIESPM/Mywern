@@ -9,7 +9,7 @@ import EDIT from "../../assets/edit.json";
 import "./Menu.css";
 
 const Menu = () => {
-  const { openModal, user } = useUserContext();
+  const { openModal, user, setEditMode } = useUserContext();
 
   const [openState, setOpenState] = useState(false);
   const playerRef = useRef(null);

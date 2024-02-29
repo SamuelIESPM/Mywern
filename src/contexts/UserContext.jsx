@@ -8,6 +8,7 @@ const userContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [modalShow, setModalShow] = useState(false);
   const [situation, setSituation] = useState("");
+  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
 
   const gotoPage = (page) => {
@@ -94,6 +95,8 @@ const userContext = ({ children }) => {
     setModalShow,
     openModal,
     closeModal,
+    editMode,
+    setEditMode,
   };
 
   return (

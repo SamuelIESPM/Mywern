@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ContextOfLevels } from "../contexts/LlevelsContext.jsx";
+import { ContextOfLevel } from "../contexts/LevelsContext.jsx";
 
 const useLevelsContext = () => {
-  const context = useContext(ContextOfLevels);
+  const context = useContext(ContextOfLevel);
   return context;
 };
 

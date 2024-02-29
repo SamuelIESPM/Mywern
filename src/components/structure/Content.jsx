@@ -7,7 +7,7 @@ const Content = (props) => {
   return (
     <Fragment>
       {modalShow && <UserModal showModal={modalShow} />}
-      {props.children}
+      <div id="pageContainer">{props.children}</div>
     </Fragment>
   );
 };
