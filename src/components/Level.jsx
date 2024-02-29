@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import useUserContext from "../hooks/useUserContext.jsx";
 import useLevelsContext from "../hooks/useLevelsContext.jsx";
@@ -12,6 +12,7 @@ const Level = () => {
   const { deleteLevel, level, setLevel, openModal, showModal } =
     useLevelsContext();
   const { editMode } = useUserContext();
+  const [localShowModal, setLocalShowModal] = useState(false);
 
   const deleteRef = useRef(null);
   const editRef = useRef(null);
@@ -28,6 +29,11 @@ const Level = () => {
 
   const handleEdit = () => {
     openModal();
+    setLocalShowModal(true);
+  };
+
+  const closeLocal = () => {
+    setLocalShowModal(false);
   };
 
   return (
@@ -83,7 +89,14 @@ const Level = () => {
         )}
         <Card.Body>{level[0].description}</Card.Body>
       </Card>
-      {showModal && <WikiModal show={showModal} type="Nivel" func="edit" />}
+      {localShowModal && (
+        <WikiModal
+          show={showModal}
+          type="Nivel"
+          func="edit"
+          closeAdd={closeLocal}
+        />
+      )}
     </Fragment>
   );
 };

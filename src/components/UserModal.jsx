@@ -22,7 +22,13 @@ const UserModal = ({ showModal }) => {
   };
 
   return (
-    <Modal size="md" centered show={showModal} onHide={closeModal}>
+    <Modal
+      size="md"
+      centered
+      show={showModal}
+      onHide={closeModal}
+      fullscreen="md"
+    >
       <Modal.Header closeButton className="user-modal">
         <Modal.Title>{user ? "User" : "Log In"}</Modal.Title>
       </Modal.Header>

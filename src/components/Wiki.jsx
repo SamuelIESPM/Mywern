@@ -24,7 +24,7 @@ const Wiki = () => {
   const expandedSize = 12;
   const [selectedWiki, setSelectedWiki] = useState(null);
   const [leftColSize, setLeftColSize] = useState(expandedSize);
-  const [localShowModal, setLocalShowModal] = useState(false); //
+  const [localShowModal, setLocalShowModal] = useState(false);
 
   const handleHover = (ref) => {
     if (ref.current) ref.current.playFromBeginning();
